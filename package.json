@@ -1,0 +1,10 @@
+{
+  "name": "zero-to-launch",
+  "version": "0.1.0",
+  "description": "An end-to-end PM case study for Our Money, a shared budget for couples that keeps personal spending private, from research to launch plan, with a working prototype.",
+  "private": true,
+  "scripts": {
+    "serve": "python3 -m http.server 8000"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zero to Launch · Our Money, an end-to-end PM case study</title>
+<meta name="description" content="An end-to-end product case study, from research to launch plan, for Our Money: a shared budget for couples that keeps personal spending private. Includes a working prototype.">
+<meta name="theme-color" content="#c2185b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c2185b'/%3E%3Ccircle cx='12' cy='16' r='6' fill='none' stroke='white' stroke-width='2.5'/%3E%3Ccircle cx='20' cy='16' r='6' fill='none' stroke='white' stroke-width='2.5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css?v=1">
+<style>
+:root{--accent:#c2185b;--soft:#fce4ec;--a:#1565c0;--b:#ef6c00}
+.intro .kicker{font:600 12.5px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.stages{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:14px}
+.stages button{all:unset;cursor:pointer;border-radius:12px;padding:10px;background:#fff;border:1px solid var(--line);font-size:13px;text-align:center}
+.stages button b{display:block;font:700 15px var(--body)}
+.stages button[aria-current="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ev{display:inline-block;font:600 11px var(--body);text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:2px 8px;margin-right:6px}
+.ev.c{background:#e8f5e9;color:#1b5e20}.ev.p{background:#fff8e1;color:#8d6e00}.ev.h{background:#ede7f6;color:#4527a0}
+.opt3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.opt3 div{border:1px solid var(--line);border-radius:14px;padding:12px;font-size:14px;background:#fff}
+.opt3 .win{border:2px solid var(--accent)}
+.proto{border:2px solid var(--accent);border-radius:20px;padding:16px;background:#fff;margin-top:14px}
+.who{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pa{color:var(--a);font-weight:700}.pb{color:var(--b);font-weight:700}
+.bal{font:700 30px/1.1 var(--display)}
+.split{height:18px;border-radius:9px;overflow:hidden;display:flex;margin-top:8px}
+.split i{display:block;height:100%}
+.ln{display:grid;grid-template-columns:90px 1fr 110px 90px 28px;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid #f0ede7;font-size:14px}
+.ln .amt{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.tag2{font:600 11px var(--body);border-radius:999px;padding:2px 7px;text-align:center}
+.tag2.s{background:var(--soft);color:var(--accent)}.tag2.m{background:#efebe7;color:#5d5952}
+.catb{display:grid;grid-template-columns:120px 1fr 110px;gap:10px;align-items:center;font-size:14px;margin-top:6px}
+.catb .t{height:12px;background:#eeebe5;border-radius:6px;overflow:hidden}.catb .t i{display:block;height:100%;background:var(--accent)}
+.catb .t i.over{background:#c62828}
+.lay2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.priv{background:#f3f1ec;border-radius:12px;padding:10px 12px;font-size:14px;margin-top:8px}
+@media (max-width:900px){.stages{grid-template-columns:repeat(3,1fr)}.opt3,.lay2{grid-template-columns:1fr}}
+@media (max-width:600px){.ln{grid-template-columns:70px 1fr 80px 26px}.ln .tag2{display:none}.catb{grid-template-columns:90px 1fr 92px;font-size:13px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./"><i><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="6" cy="8" r="3.3" fill="none" stroke="white" stroke-width="1.6"/><circle cx="10" cy="8" r="3.3" fill="none" stroke="white" stroke-width="1.6"/></svg></i>Zero to Launch</a>
+  <nav><a class="hide-sm" href="https://github.com/costasxeras-stack/zero-to-launch">GitHub</a><a href="https://kostasxeras.com/">Portfolio</a></nav>
+</div></header>
+<main class="wrap">
+  <section class="intro">
+    <span class="kicker">End-to-end case study · from research to launch</span>
+    <h1>Our Money: one budget for two people, without giving up privacy.</h1>
+    <p>The full product journey for one idea, in six stages: what I learned, what I decided, what I built and how I would launch it. Every stage marks what is confirmed, what is a proxy and what is still a hypothesis. Stage 4 is a working prototype you can use.</p>
+    <div class="stages" id="stages"></div>
+  </section>
+
+  <div data-st="0">
+    <section class="card">
+      <h2>1 · Discover</h2>
+      <p class="sub">Where the idea comes from and what I know so far.</p>
+      <ul style="padding-left:20px;display:grid;gap:10px;font-size:15px">
+        <li><span class="ev c">Built</span>I built <a href="https://kostasxeras.com/spend-lens/">Spend Lens</a> for one person's spending. Its next steps already pointed to "shared budgets for two people from two exports".</li>
+        <li><span class="ev p">Proxy</span>In 45 App Store reviews of five money apps (<a href="https://kostasxeras.com/listening-tour/">Listening Tour</a>), 27 mention a partner. Splitting and "who owes whom" came with the lowest average rating among common themes (2.93 stars). Bank connection problems came up in 18 reviews.</li>
+        <li><span class="ev p">Proxy</span>Privacy between partners came up in only 2 reviews. Absence in reviews is not evidence of absence, so it goes on the interview list.</li>
+        <li><span class="ev h">Pending</span>Five interviews with couples who share some money and keep some separate. The guide is ready in Listening Tour. Results: [to add].</li>
+      </ul>
+    </section>
+  </div>
+
+  <div data-st="1" hidden>
+    <section class="card">
+      <h2>2 · Define</h2>
+      <h3 style="font:600 16px var(--body);margin-top:6px">Who</h3>
+      <p>Couples who live together, share some costs (rent, groceries, holidays) and keep some money personal. Each has their own bank. <span class="ev h">Hypothesis</span>This "partly shared" group is underserved: joint-account apps assume all money is shared, and split apps assume roommates.</p>
+      <h3 style="font:600 16px var(--body);margin-top:12px">Job to be done</h3>
+      <p>"When we pay for shared things from two accounts, help us see what we spent together and whether we are each paying our fair share, so we do not have to keep score or argue about it."</p>
+      <h3 style="font:600 16px var(--body);margin-top:12px">Problem statement</h3>
+      <p>Partly-sharing couples have no single view of shared spending across two banks. They keep score in their heads, a spreadsheet or a split app built for friends, which turns a partner into a debtor. Success is a shared view both trust, a fair-share rule they agree on, and no need to show personal spending.</p>
+      <h3 style="font:600 16px var(--body);margin-top:12px">Principles</h3>
+      <ol style="padding-left:20px;font-size:15px;display:grid;gap:4px"><li>Shared is opt-in, per payment. Personal stays personal.</li><li>Fair is agreed, not assumed: 50/50 or by income, chosen together.</li><li>No bank login. Data stays on devices.</li></ol>
+    </section>
+  </div>
+
+  <div data-st="2" hidden>
+    <section class="card">
+      <h2>3 · Ideate</h2>
+      <p class="sub">Three ways to solve it. I chose the one that tests the riskiest assumption cheapest.</p>
+      <div class="opt3">
+        <div><b>A · Joint account view</b><p class="sub" style="margin:6px 0 0">Connect both banks, show everything. <br><b>Against:</b> needs bank access, breaks principle 3, and shows personal spending.</p></div>
+        <div><b>B · Split app for couples</b><p class="sub" style="margin:6px 0 0">Log who paid, settle up. <br><b>Against:</b> the debt frame is the complaint in the reviews. Already well served.</p></div>
+        <div class="win"><b>C · Shared budget with a fair-share rule</b> <span class="ev c">Chosen</span><p class="sub" style="margin:6px 0 0">Mark payments as shared, set a budget together, see each person's share against an agreed rule. Personal spending shows as a total only, or not at all.</p></div>
+      </div>
+      <h3 style="font:600 16px var(--body);margin-top:14px">Riskiest assumptions</h3>
+      <ol style="padding-left:20px;font-size:15px;display:grid;gap:4px"><li>Couples will mark payments as shared, payment by payment, if it is one tap.</li><li>A fair-share rule reduces arguments more than a running debt.</li><li>Partners want to hide personal spending, not only see everything.</li></ol>
+    </section>
+  </div>
+
+  <div data-st="3" hidden>
+    <section class="card">
+      <h2>4 · Prototype</h2>
+      <p class="sub">A working prototype of option C. It runs in your browser and saves there. It starts with made-up sample data for a fictional couple, Ala and Bartek. Clear it to try your own.</p>
+      <div class="proto">
+        <div class="row" style="justify-content:space-between;margin-top:0">
+          <div class="who"><span class="sub" style="margin:0">Viewing as</span><div class="seg" role="group" aria-label="Viewing as"><button type="button" data-as="a" aria-pressed="true"></button><button type="button" data-as="b" aria-pressed="false"></button></div></div>
+          <div class="who"><span class="sub" style="margin:0">Fair share</span><div class="seg" role="group" aria-label="Fair share rule"><button type="button" data-rule="equal" aria-pressed="false">50/50</button><button type="button" data-rule="income" aria-pressed="true">By income</button></div></div>
+        </div>
+        <div class="banner" id="sample-note" style="margin-top:10px">Sample data: a made-up couple and month.</div>
+        <div class="lay2" style="margin-top:12px">
+          <div>
+            <h3 style="font:600 15px var(--body)">This month together</h3>
+            <div class="bal" id="tot"></div>
+            <div class="split" id="splitbar"></div>
+            <p class="sub" id="fair" style="margin-top:8px"></p>
+            <div id="settle"></div>
+            <h3 style="font:600 15px var(--body);margin-top:14px">Shared budget</h3>
+            <div id="cats"></div>
+          </div>
+          <div>
+            <h3 style="font:600 15px var(--body)">Add a payment</h3>
+            <div class="grid2"><div><label for="f-what">What</label><input type="text" id="f-what" placeholder="e.g. Biedronka"></div><div><label for="f-amt">Amount (PLN)</label><input type="number" id="f-amt" min="0" step="0.01"></div></div>
+            <div class="grid3"><div><label for="f-cat">Category</label><select id="f-cat"></select></div><div><label for="f-who">Paid by</label><select id="f-who"></select></div><div><label for="f-sh">Type</label><select id="f-sh"><option value="s">Shared</option><option value="m">Personal</option></select></div></div>
+            <div class="row"><button class="btn primary" type="button" id="f-add">Add</button></div>
+            <div class="priv" id="priv"></div>
+          </div>
+        </div>
+        <h3 style="font:600 15px var(--body);margin-top:16px">Payments</h3>
+        <div id="list"></div>
+        <div class="grid3" style="margin-top:12px;align-items:end">
+          <div><label for="inc-a" id="l-inc-a"></label><input type="number" id="inc-a" min="0" step="100"></div>
+          <div><label for="inc-b" id="l-inc-b"></label><input type="number" id="inc-b" min="0" step="100"></div>
+          <div class="row" style="margin:0"><button class="btn small" type="button" id="sample">Load sample</button><button class="btn small danger" type="button" id="clear">Clear all</button></div>
+        </div>
+        <p class="note">Incomes are only used for the income-based rule and stay in this browser. Prototype only: no sync between two phones yet.</p>
+      </div>
+    </section>
+  </div>
+
+  <div data-st="4" hidden>
+    <section class="card">
+      <h2>5 · Test</h2>
+      <p class="sub">How I would test the three riskiest assumptions before building more.</p>
+      <div style="overflow-x:auto"><table><thead><tr><th>Assumption</th><th>Test</th><th>Pass if</th><th>Status</th></tr></thead><tbody>
+        <tr><td>Couples will mark payments as shared</td><td>[5] couples use the prototype for 2 weeks</td><td>[x]% of shared payments marked within 3 days</td><td><span class="ev h">Not run</span></td></tr>
+        <tr><td>Fair share beats a running debt</td><td>Half see "fair share", half see "who owes whom", then interview</td><td>More couples in the fair-share group say it felt fair: [x] of [n]</td><td><span class="ev h">Not run</span></td></tr>
+        <tr><td>Partners want to hide personal spending</td><td>Ask in interviews, then count use of "personal"</td><td>[x]% of couples mark at least one personal payment</td><td><span class="ev h">Not run</span></td></tr>
+      </tbody></table></div>
+      <p class="sub" style="margin-top:10px">Usability script: set up as a couple, add five payments each, change the fair-share rule, settle up. Observe where they hesitate. Notes go into Listening Tour so quotes and paraphrases stay separate.</p>
+    </section>
+  </div>
+
+  <div data-st="5" hidden>
+    <section class="card">
+      <h2>6 · Launch</h2>
+      <h3 style="font:600 16px var(--body);margin-top:6px">Launch as a Spend Lens feature first</h3>
+      <p>Not a new app. Spend Lens already imports bank exports privately, so "Our Money" becomes a shared space on top of it. That reuses the import and category work, and the roadmap in <a href="https://kostasxeras.com/now-next-later/">Now Next Later</a> already sequences it: match transfers and split payments first, shared budgets next.</p>
+      <h3 style="font:600 16px var(--body);margin-top:12px">Rollout</h3>
+      <ol style="padding-left:20px;font-size:15px;display:grid;gap:4px"><li>Private beta with the [5] test couples and their friends.</li><li>Open beta behind an invite: one partner invites the other, which is the growth loop.</li><li>Public launch once the second-month return rate passes [target].</li></ol>
+      <h3 style="font:600 16px var(--body);margin-top:12px">Metrics</h3>
+      <div style="overflow-x:auto"><table><thead><tr><th>Metric</th><th>Why</th><th>Target</th></tr></thead><tbody>
+        <tr><td>Couples with both partners active</td><td>The product only works with two</td><td>[x]% of invites accepted</td></tr>
+        <tr><td>Share of payments marked shared within 3 days</td><td>Habit and trust in the shared view</td><td>[x]%</td></tr>
+        <tr><td>Second-month return</td><td>Value beyond curiosity</td><td>[x]%</td></tr>
+        <tr><td>Guardrail: personal spending exposure complaints</td><td>Privacy is the promise</td><td>0</td></tr>
+      </tbody></table></div>
+      <h3 style="font:600 16px var(--body);margin-top:12px">Risks</h3>
+      <ul style="padding-left:20px;font-size:15px;display:grid;gap:4px"><li>Two-device sync without a server is hard. Mitigation: encrypted export and import between partners first, sync later.</li><li>Money is emotional. Copy must never blame. "Bartek owes Ala" becomes "Bartek's share is 120 PLN below the rule".</li><li>Interviews may show couples want full transparency. Then privacy becomes a setting, not the pitch.</li></ul>
+    </section>
+  </div>
+
+  <div class="row" style="justify-content:space-between"><button class="btn" type="button" id="prev">← Previous stage</button><button class="btn primary" type="button" id="next">Next stage →</button></div>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<footer><div class="wrap"><span>Zero to Launch v0.1.0 by <a href="https://kostasxeras.com/">Konstantinos Xeras</a>, built with Claude (Anthropic). Not financial advice. <a href="https://github.com/costasxeras-stack/zero-to-launch">Code and decisions on GitHub</a>.</span></div></footer>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var pln = function (n) { return Math.round(n).toLocaleString('pl-PL').replace(/ /g, ' ') + ' PLN'; };
+  function toast(m) { var t = $('toast'); t.textContent = m; t.classList.add('on'); setTimeout(function () { t.classList.remove('on'); }, 1800); }
+
+  // stages
+  var ST = ['Discover', 'Define', 'Ideate', 'Prototype', 'Test', 'Launch'], st = 0;
+  function stage(i) {
+    st = Math.max(0, Math.min(5, i));
+    $('stages').innerHTML = ST.map(function (s, n) { return '<button type="button" data-g="' + n + '" aria-current="' + (n === st) + '"><b>' + (n + 1) + '</b>' + s + '</button>'; }).join('');
+    document.querySelectorAll('[data-st]').forEach(function (d) { d.hidden = +d.getAttribute('data-st') !== st; });
+    $('prev').disabled = st === 0; $('next').disabled = st === 5;
+    try { history.replaceState(null, '', '#' + ST[st].toLowerCase()); } catch (e) {}
+  }
+  $('stages').addEventListener('click', function (e) { var b = e.target.closest('[data-g]'); if (b) stage(+b.getAttribute('data-g')); });
+  $('prev').addEventListener('click', function () { stage(st - 1); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  $('next').addEventListener('click', function () { stage(st + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  var h = (location.hash || '').slice(1), hi = ST.map(function (s) { return s.toLowerCase(); }).indexOf(h); stage(hi >= 0 ? hi : 0);
+
+  // prototype
+  var CATS = { Groceries: 1800, Rent: 3200, Bills: 650, 'Eating out': 500, Home: 300, Holidays: 600, Other: 200 };
+  function sample() { return { sample: true, names: { a: 'Ala', b: 'Bartek' }, inc: { a: 9000, b: 6000 }, rule: 'income', tx: [
+    { w: 'Rent', a: 3200, c: 'Rent', by: 'a', s: true }, { w: 'Biedronka', a: 214.5, c: 'Groceries', by: 'b', s: true }, { w: 'Lidl', a: 186.2, c: 'Groceries', by: 'a', s: true }, { w: 'Electricity', a: 280, c: 'Bills', by: 'b', s: true }, { w: 'Internet', a: 69, c: 'Bills', by: 'b', s: true }, { w: 'Pizza night', a: 142, c: 'Eating out', by: 'b', s: true }, { w: 'Auchan', a: 402.8, c: 'Groceries', by: 'b', s: true }, { w: 'IKEA', a: 389, c: 'Home', by: 'a', s: true }, { w: 'Gym', a: 159, c: 'Other', by: 'a', s: false }, { w: 'Games', a: 230, c: 'Other', by: 'b', s: false }, { w: 'Train to Gdańsk', a: 312, c: 'Holidays', by: 'b', s: true }, { w: 'Żabka', a: 46.3, c: 'Groceries', by: 'a', s: true }, { w: 'Clothes', a: 420, c: 'Other', by: 'a', s: false }
+  ] }; }
+  var D; try { D = JSON.parse(localStorage.getItem('ztl') || 'null'); } catch (e) { D = null; } if (!D) D = sample();
+  var as = 'a';
+  function save() { try { localStorage.setItem('ztl', JSON.stringify(D)); } catch (e) {} }
+  var other = function (p) { return p === 'a' ? 'b' : 'a'; };
+  function draw() {
+    var N = D.names;
+    document.querySelectorAll('[data-as]').forEach(function (b) { var p = b.getAttribute('data-as'); b.textContent = N[p]; b.setAttribute('aria-pressed', p === as); });
+    document.querySelectorAll('[data-rule]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-rule') === D.rule); });
+    $('sample-note').hidden = !D.sample;
+    $('f-cat').innerHTML = Object.keys(CATS).map(function (c) { return '<option>' + c + '</option>'; }).join('');
+    $('f-who').innerHTML = ['a', 'b'].map(function (p) { return '<option value="' + p + '"' + (p === as ? ' selected' : '') + '>' + esc(N[p]) + '</option>'; }).join('');
+    $('l-inc-a').textContent = N.a + ' monthly income'; $('l-inc-b').textContent = N.b + ' monthly income'; $('inc-a').value = D.inc.a; $('inc-b').value = D.inc.b;
+    var sh = D.tx.filter(function (t) { return t.s; }), tot = sh.reduce(function (x, t) { return x + t.a; }, 0);
+    var paid = { a: 0, b: 0 }; sh.forEach(function (t) { paid[t.by] += t.a; });
+    var ia = +D.inc.a || 0, ib = +D.inc.b || 0, shareA = D.rule === 'equal' || ia + ib === 0 ? 0.5 : ia / (ia + ib);
+    var fairA = tot * shareA, diff = paid.a - fairA;
+    $('tot').textContent = pln(tot);
+    $('splitbar').innerHTML = tot ? '<i style="width:' + (paid.a / tot * 100) + '%;background:var(--a)"></i><i style="width:' + (paid.b / tot * 100) + '%;background:var(--b)"></i>' : '';
+    $('fair').innerHTML = '<span class="pa">' + esc(N.a) + '</span> paid ' + pln(paid.a) + ', <span class="pb">' + esc(N.b) + '</span> paid ' + pln(paid.b) + '. The ' + (D.rule === 'equal' ? '50/50' : 'income') + ' rule gives ' + esc(N.a) + ' ' + Math.round(shareA * 100) + '% and ' + esc(N.b) + ' ' + Math.round((1 - shareA) * 100) + '%.';
+    var lo = diff > 0 ? 'b' : 'a', gap = Math.abs(diff);
+    $('settle').innerHTML = gap < 1 ? '<div class="priv">You are both at your fair share this month.</div>' : '<div class="priv"><b>' + esc(N[lo]) + '\'s share is ' + pln(gap) + ' below the rule.</b> ' + (lo === as ? 'You could pay the next shared costs, or move ' + pln(gap) + ' to ' + esc(N[other(lo)]) + '.' : esc(N[lo]) + ' could pay the next shared costs, or move ' + pln(gap) + ' to you.') + ' <button class="btn small" type="button" id="settle-btn" style="margin-left:6px">Mark as balanced</button></div>';
+    var byC = {}; sh.forEach(function (t) { byC[t.c] = (byC[t.c] || 0) + t.a; });
+    $('cats').innerHTML = Object.keys(CATS).filter(function (c) { return byC[c] || c !== 'Other'; }).map(function (c) { var v = byC[c] || 0, b = CATS[c], over = v > b; return '<div class="catb"><span>' + c + '</span><span class="t"><i class="' + (over ? 'over' : '') + '" style="width:' + Math.min(100, v / b * 100) + '%"></i></span><span style="text-align:right;font-size:13px' + (over ? ';color:#c62828;font-weight:600' : '') + '">' + pln(v) + ' / ' + Math.round(b) + '</span></div>'; }).join('');
+    var mine = D.tx.filter(function (t) { return !t.s && t.by === as; }), theirs = D.tx.filter(function (t) { return !t.s && t.by === other(as); });
+    $('priv').innerHTML = '<b>Privacy.</b> You see your ' + mine.length + ' personal payment' + (mine.length === 1 ? '' : 's') + '. ' + esc(N[other(as)]) + '\'s personal spending is hidden from you: ' + (theirs.length ? theirs.length + ' payment' + (theirs.length === 1 ? '' : 's') + ', shown only as "personal".' : 'none this month.');
+    $('list').innerHTML = D.tx.map(function (t, i) { return { t: t, i: i }; }).reverse().map(function (o) {
+      var t = o.t, hidden = !t.s && t.by !== as;
+      return '<div class="ln"><span class="' + (t.by === 'a' ? 'pa' : 'pb') + '">' + esc(N[t.by]) + '</span><span>' + (hidden ? '<i style="color:var(--faint)">Personal payment</i>' : esc(t.w) + ' <span style="color:var(--faint);font-size:12.5px">· ' + esc(t.c) + '</span>') + '</span><span class="tag2 ' + (t.s ? 's' : 'm') + '">' + (t.s ? 'Shared' : 'Personal') + '</span><span class="amt">' + (hidden ? '•••' : pln(t.a)) + '</span>' + (hidden ? '<span></span>' : '<button class="btn small ghost" type="button" data-sw="' + o.i + '" title="Switch shared or personal" aria-label="Switch shared or personal" style="padding:2px 6px">⇄</button>') + '</div>';
+    }).join('') || '<p class="empty">No payments yet.</p>';
+  }
+  document.querySelector('[data-as]').parentNode.addEventListener('click', function (e) { var b = e.target.closest('[data-as]'); if (b) { as = b.getAttribute('data-as'); draw(); } });
+  document.querySelector('[data-rule]').parentNode.addEventListener('click', function (e) { var b = e.target.closest('[data-rule]'); if (b) { D.rule = b.getAttribute('data-rule'); save(); draw(); } });
+  $('list').addEventListener('click', function (e) { var b = e.target.closest('[data-sw]'); if (!b) return; var t = D.tx[+b.getAttribute('data-sw')]; t.s = !t.s; save(); draw(); });
+  $('settle').addEventListener('click', function (e) {
+    if (e.target.id !== 'settle-btn') return;
+    var sh = D.tx.filter(function (t) { return t.s; }), tot = sh.reduce(function (x, t) { return x + t.a; }, 0), paidA = sh.filter(function (t) { return t.by === 'a'; }).reduce(function (x, t) { return x + t.a; }, 0);
+    var shareA = D.rule === 'equal' || !(+D.inc.a + +D.inc.b) ? 0.5 : D.inc.a / (+D.inc.a + +D.inc.b), diff = paidA - tot * shareA;
+    // a transfer between partners counts as shared money paid by the one below the rule, and as a negative for the other
+    var lo = diff > 0 ? 'b' : 'a', gap = Math.round(Math.abs(diff) * 100) / 100;
+    D.tx.push({ w: 'Transfer to ' + D.names[other(lo)], a: gap, c: 'Other', by: lo, s: true, xfer: true }); D.tx.push({ w: 'Transfer from ' + D.names[lo], a: -gap, c: 'Other', by: other(lo), s: true, xfer: true });
+    save(); draw(); toast('Balanced');
+  });
+  $('f-add').addEventListener('click', function () {
+    var w = $('f-what').value.trim(), a = +$('f-amt').value; if (!w || !(a > 0)) { toast('Add what and an amount'); return; }
+    D.tx.push({ w: w, a: a, c: $('f-cat').value, by: $('f-who').value, s: $('f-sh').value === 's' }); $('f-what').value = ''; $('f-amt').value = ''; save(); draw();
+  });
+  ['inc-a', 'inc-b'].forEach(function (id) { $(id).addEventListener('input', function () { D.inc[id.slice(-1)] = Math.max(0, +$(id).value || 0); save(); draw(); }); });
+  $('sample').addEventListener('click', function () { D = sample(); save(); draw(); toast('Sample loaded'); });
+  $('clear').addEventListener('click', function () { D = { sample: false, names: { a: 'Partner A', b: 'Partner B' }, inc: { a: 0, b: 0 }, rule: 'equal', tx: [] }; save(); draw(); toast('Cleared'); });
+  draw();
+})();
+</script>
+</body>
+</html>
