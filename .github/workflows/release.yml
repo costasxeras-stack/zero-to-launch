@@ -1,0 +1,43 @@
+# Publishes a GitHub release when the version in package.json has no release yet.
+# Title: the commit subject if it starts with the version (for example "v0.2.0: add X"), otherwise the version.
+# Notes: the matching section of CHANGELOG.md.
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish the release if it is missing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          TAG="v$VERSION"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists. Nothing to do."
+            exit 0
+          fi
+          awk -v v="$VERSION" '
+            index($0, "## [" v "]") == 1 { on = 1; next }
+            on && /^## \[/ { exit }
+            on { print }
+          ' CHANGELOG.md > notes.md
+          if ! grep -q '[^[:space:]]' notes.md; then
+            echo "No CHANGELOG.md section for $VERSION. Add one, then push again."
+            exit 1
+          fi
+          SUBJECT=$(git log -1 --pretty=%s)
+          case "$SUBJECT" in
+            "$TAG:"*) TITLE="$SUBJECT" ;;
+            *) TITLE="$TAG" ;;
+          esac
+          gh release create "$TAG" --target "$GITHUB_SHA" --title "$TITLE" --notes-file notes.md
