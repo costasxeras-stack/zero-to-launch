@@ -61,9 +61,9 @@ Targets will be set after the prototype test.
 2. Run the two-week prototype test with [5] couples
 3. Build encrypted export and import between partners
 
-## How it was built
+## My role
 
-I framed the problem, made the product calls and wrote the conclusions. Claude (Anthropic) was my engineering partner for the code. 
+I framed the problem, made the product calls and wrote the conclusions. 
 
 ## Run it yourself
 
